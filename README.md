@@ -1,5 +1,5 @@
 INSTRUKCIJA
-- Įrašiu modulį, MANAGE -> CONFIGURATION -> REGIONAL AND LANGUAGE Atsiras meniu punktas - Municipalities Settings.
+- Įrašius modulį, MANAGE -> CONFIGURATION -> REGIONAL AND LANGUAGE Atsiras meniu punktas - Municipalities Settings.
 - Municipalities Settings yra 2 tabai - Municipalities List (Savivaldybių sąrašas) ir Municipalities Configuration (Modulio nustatymai)
 
 - Municipalities List
