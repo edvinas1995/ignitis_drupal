@@ -1,0 +1,7 @@
+name: 'Municipalities registration'
+type: module
+description: 'Allow users to select municipality and city. All municipalities data get from Postit.lt API v2'
+package: 'Custom'
+version: '8.x-1.0'
+core: '8.x'
+project: 'municipalities_registration'

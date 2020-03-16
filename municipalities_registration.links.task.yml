@@ -1,0 +1,8 @@
+municipalities_registration.config:
+ route_name: municipalities_registration.config
+ base_route: municipalities_registration.base
+ title: 'Municipalities Configuration'
+municipalities_registration.list:
+ route_name: municipalities_registration.list
+ base_route: municipalities_registration.base
+ title: 'Municipalities List'

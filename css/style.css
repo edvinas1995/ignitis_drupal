@@ -1,0 +1,7 @@
+.user-register-form #edit-municipality .form-item-city {
+    display: none;
+}
+
+.user-register-form #edit-municipality .form-item-city.show {
+    display: block;
+}

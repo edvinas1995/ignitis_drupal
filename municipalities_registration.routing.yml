@@ -1,0 +1,28 @@
+municipalities_registration.list:
+  path: /admin/config/system/municipalities_registration/list
+  defaults:
+    _form: 'Drupal\municipalities_registration\Form\MunicipalitiesRegistrationList'
+    _title: 'Municipalities List'
+  requirements:
+    _permission: 'administer site configuration'
+municipalities_registration.config:
+  path: /admin/config/system/municipalities_registration
+  defaults:
+    _form: 'Drupal\municipalities_registration\Form\MunicipalitiesRegistrationSetting'
+    _title: 'Municipalities Configuration'
+  requirements:
+    _permission: 'administer site configuration'
+municipalities_registration.delete:
+  path: /admin/config/system/municipalities_registration/list/delete/{id}
+  defaults:
+    _form: 'Drupal\municipalities_registration\Form\DeleteMunicipality'
+    _title: 'Delete Municipality'
+  requirements:
+    _permission: 'administer site configuration'
+municipalities_registration.edit:
+  path: /admin/config/system/municipalities_registration/list/edit/{id}
+  defaults:
+    _form: 'Drupal\municipalities_registration\Form\EditMunicipality'
+    _title: 'Edit Municipality'
+  requirements:
+    _permission: 'administer site configuration'

@@ -1,0 +1,8 @@
+municipalities_registration_js:
+  css:
+    component:
+      css/style.css: {}
+  js:
+    js/script.js: {}
+  dependencies:
+    - core/jquery

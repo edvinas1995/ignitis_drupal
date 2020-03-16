@@ -1,0 +1,32 @@
+<?php
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Municipalities registration tables creation.
+ *
+ * Implements hook_schema()
+ */
+function municipalities_registration_schema() {
+  $schema['municipalities_registration_items'] =  municipalities_registration_items_table();  
+  return $schema;
+}
+
+function municipalities_registration_items_table(){
+    return [
+        'fields' => [
+          'id' => [
+            'type' => 'serial',
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+          ],
+          'title' => [
+            'type' => 'varchar',
+            'length' => 300,
+            'not null' => TRUE,
+          ],
+        ],
+        'primary key' => ['id'],
+    ];
+}
+

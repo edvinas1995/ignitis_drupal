@@ -1,0 +1,86 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter() for \Drupal\user\RegisterForm.
+ */
+function municipalities_registration_form_user_register_form_alter(&$form, FormStateInterface $form_state) {
+    municipalities_registration_user_municipality($form, $form_state);
+    $form['municipality']['#attached']['library'][] = 'municipalities_registration/municipalities_registration_js';
+    $form['actions']['submit']['#submit'][] = 'municipalities_registration_user_register_submit';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for \Drupal\user\AccountForm.
+ */
+function municipalities_registration_form_user_form_alter(&$form, FormStateInterface $form_state) {
+    municipalities_registration_user_municipality($form, $form_state);
+    $form['actions']['submit']['#submit'][] = 'municipalities_registration_user_admin_settings_submit';
+}
+
+
+/**
+ * Add the municipality and city field to the user edit and register forms.
+ */
+function municipalities_registration_user_municipality(&$form, FormStateInterface $form_state) {
+    $database = \Drupal::database();
+    $user_data = \Drupal::service('user.data');
+    $account = $form_state->getFormObject()->getEntity();
+    $form['municipality'] = [
+      '#type' => 'details',
+      '#title' => t('Municipality settings'),
+      '#open' => TRUE,
+      '#weight' => 7
+    ];
+    
+    $municipality = $user_data->get('municipalities_registration', $account->id(), 'municipality');
+    $municipalities = $database->query("SELECT id,title FROM municipalities_registration_items ORDER BY title ASC")->fetchAll(\PDO::FETCH_KEY_PAIR);    
+    $form['municipality']['municipality'] = [
+      '#type' => 'select',
+      '#title' => t('Municipality'),
+      '#default_value' => !empty($municipality)?$municipality:'',
+      '#options' => !empty($municipalities)?$municipalities:array(),
+      '#attributes' => ['class' => ['municipality-select']],
+      '#required' => TRUE,
+      '#empty_option' => t('- Select -')
+    ];
+    
+    $city = $user_data->get('municipalities_registration', $account->id(), 'city');
+    $form['municipality']['city'] = [
+      '#type' => 'textfield',
+      '#title' => t('City'),
+      '#default_value' => !empty($city)?$city:'',
+      '#required' => TRUE,
+    ];
+   
+}
+
+function municipalities_registration_user_admin_settings_submit($form, FormStateInterface $form_state) {
+    $user_data = \Drupal::service('user.data');
+    $uid = $form_state->getValue('uid');
+    
+    if($form_state->hasValue('municipality') && !$form_state->isValueEmpty('municipality')){
+        $user_data->set('municipalities_registration', $uid, 'municipality', (int) $form_state->getValue('municipality'));  
+    }
+    if($form_state->hasValue('city') && !$form_state->isValueEmpty('city')){
+        $user_data->set('municipalities_registration', $uid, 'city', $form_state->getValue('city'));  
+    }
+}
+
+function municipalities_registration_user_register_submit($form, FormStateInterface $form_state) {
+    $user_data = \Drupal::service('user.data');
+    $account = $form_state->getFormObject()->getEntity();
+
+    if($account->id() && $form_state->hasValue('municipality') && !$form_state->isValueEmpty('municipality')){
+        $user_data->set('municipalities_registration', $account->id(), 'municipality', (int) $form_state->getValue('municipality'));  
+    }
+    if($account->id() && $form_state->hasValue('city') && !$form_state->isValueEmpty('city')){
+        $user_data->set('municipalities_registration', $account->id(), 'city', $form_state->getValue('city'));  
+    }
+}
+
+
+
+
+

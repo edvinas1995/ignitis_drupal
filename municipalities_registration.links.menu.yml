@@ -1,0 +1,6 @@
+municipalities_registration.settings:
+  title: 'Municipalities settings'
+  route_name: municipalities_registration.list
+  parent: system.admin_config_regional
+  description: 'Manage municipalities settings'
+  weight: -10
